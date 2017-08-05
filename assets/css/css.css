@@ -1,0 +1,21 @@
+#steam{
+  background-image: url(../images/steam.png);
+  background-size:cover;
+  background-position: center;
+}
+
+#ps4{
+  background-image: url(../images/playstation.png);
+  background-size:cover;
+  background-position: center;
+}
+
+#xbox{
+  background-image: url(../images/xbox.png);
+  background-size:cover;
+  background-position: center;
+}
+.search-btn .btn {
+  width:45px;
+  height:38px;
+}
