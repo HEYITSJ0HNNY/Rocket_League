@@ -19,3 +19,17 @@
   width:45px;
   height:38px;
 }
+
+#homepageSearch{
+  background-image: url(http://i.imgur.com/OkUXXji.png);
+  height: 100vh;
+}
+
+.mainSearch{
+  position: relative;
+  color: black;
+  font-size: 30px;
+  top: 250px;
+  align-items: center;
+  justify-content: center;
+}
