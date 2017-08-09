@@ -17,6 +17,26 @@
 </head>
 <body>
 
+<!-- Modal Start -->
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Whoa there, hold on.</h4>
+      </div>
+      <div class="modal-body">
+        <p>Hi! Kevin, Ritter, and Johnny here. Our site requires an API key to access data! Please enter it below!</p>
+        <input type="text" id="apiKeyToken">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveKey">Save Key!</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!-- Modal End -->
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -71,7 +91,8 @@
 
   <!--- jQuery Link --->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+  <!-- Bootstrap js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <!--- JavaScript Link --->
   <script type="text/javascript" src="assets/javascript/javascript.js"></script>
 </body>

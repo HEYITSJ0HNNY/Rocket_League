@@ -6,11 +6,12 @@ $.ajaxPrefilter(function(options) {
     }
 });
 
-
 function checkActive(item) {
   $(item).siblings().removeClass("active");
   $(item).toggleClass('active');
 }
+
+// Platform selection
 var platform;
 $('#ps4').on('click', function(){
   platform = "ps4";
@@ -33,14 +34,22 @@ $('#steam').on('click', function(){
     checkActive($(this));
   }
 })
+// Platform selection end
 
-
+// ASK for API key, website only works with API key
 var apikey = localStorage.getItem('apikey');
 console.log(apikey)
 if (!apikey) {
-  apikey = prompt('API key?');
-  localStorage.setItem('apikey', apikey);
+  $('#myModal').modal({ show: false});
+  $('#myModal').modal('show');
+  $('#saveKey').on('click', function(){
+    apikey = $('#apiKeyToken').val();
+    localStorage.setItem('apikey', apikey);
+    $('#myModal').modal('hide');
+  })
 }
+
+// When go button is clicked run AJAX call
 $('#submit').on('click', function(){
   var id = $('#inputSearch').val()
 
