@@ -18,6 +18,7 @@
 .search-btn .btn {
   width:45px;
   height:38px;
+  opacity: .5;
 }
 
 #homepageSearch{
@@ -59,4 +60,8 @@
 
 .stats{
   margin: 15px;
+}
+
+.search-btn .active.btn{
+  opacity: .9;
 }

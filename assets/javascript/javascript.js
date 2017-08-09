@@ -6,15 +6,32 @@ $.ajaxPrefilter(function(options) {
     }
 });
 
+
+function checkActive(item) {
+  $(item).siblings().removeClass("active");
+  $(item).toggleClass('active');
+}
 var platform;
 $('#ps4').on('click', function(){
   platform = "ps4";
+  if(platform === "ps4"){
+    console.log("ps4 selected")
+    checkActive($(this));
+  }
 })
 $('#xbox').on('click', function(){
   platform = "xbox";
+  if(platform === "xbox"){
+    console.log("xbox selected");
+    checkActive($(this));
+  }
 })
 $('#steam').on('click', function(){
   platform = "steam";
+  if(platform === "steam"){
+    console.log("steam selected");
+    checkActive($(this));
+  }
 })
 
 
