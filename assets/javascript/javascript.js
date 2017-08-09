@@ -25,11 +25,11 @@ if (!apikey) {
   localStorage.setItem('apikey', apikey);
 }
 $('#submit').on('click', function(){
-  var id = $('#steamID').val()
+  var id = $('#inputSearch').val()
 
   $.ajax({
     method: 'GET',
-    url: "https://api.rocketleague.com/api/v1/steam/playerskills/" + id + "/",
+    url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
     headers: {
       'Authorization': 'Token ' + apikey
     }
