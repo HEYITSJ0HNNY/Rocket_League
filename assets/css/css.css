@@ -25,39 +25,26 @@
   height: 100vh;
 }
 
+#individualStats{
+    background-image: url(http://i.imgur.com/OkUXXji.png);
+    height: 100vh;
+}
+
 .mainSearch{
   position: relative;
   color: black;
   font-size: 30px;
-  top: 250px;
+  top: 100px;
   align-items: center;
   justify-content: center;
 }
 
 #curSeasonLb{
-  background: black;
-  color: white;
   text-align: center;
-  font-size: 20px;
-  margin-right: 105px;
-  margin-left: 25px;
+
 }
 
-#totalLb{
-  background: white;
-  background: black;
-  color: white;
+#lifetimeLb{
   text-align: center;
-  font-size: 20px;
-}
 
-#curSeasonTable{
-  width: 42%;
-  float: left;
-  margin-right: 100px;
-  margin-left: 25px;
-}
-
-#totalTable{
-  width: 42%
 }
