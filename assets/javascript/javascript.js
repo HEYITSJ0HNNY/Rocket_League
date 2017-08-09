@@ -24,6 +24,12 @@ firebase.initializeApp(config);
 var database = firebase.database();
 // EO firebase initialization
 
+// Testing Firebase DB Grounds
+database.ref().on('value', function(snapshot){
+  console.log(snapshot.val());
+})
+// Testing Firebase DB Grounds
+
 // Platform selection
 var platform;
 $('#ps4').on('click', function(){
@@ -66,7 +72,7 @@ $('#submit').on('click', function(){
   if ( id === "" ){
     alert("You need input!");
   } else {
-    //Check to see if ID exists in the database
+    //Check to see if ID exists in the database (not working returns null)
     database.ref().child('rlstatsdb').orderByChild("searchTerm").equalTo(id).once("value", function(snapshot) {
         var userData = snapshot.val();
         console.log(snapshot.val());
