@@ -1,5 +1,6 @@
 // Javascript written by Ritter Gustave
 
+var recentSearch = [];
 $.ajaxPrefilter(function(options) {
     if (options.crossDomain && $.support.cors) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
@@ -73,12 +74,14 @@ $('#submit').on('click', function(){
     alert("You need input!");
   } else {
     //Check to see if ID exists in the database (not working returns null)
+    recentSearch.push(id);
+    localStorage.setItem('recentSearch', JSON.stringify(recentSearch));
     database.ref().child('rlstatsdb').orderByChild("searchTerm").equalTo(id).once("value", function(snapshot) {
         var userData = snapshot.val();
         console.log(snapshot.val());
         if (userData){
           console.log("exists!");
-        }
+        };
     });
 
     database.ref().push({
@@ -88,20 +91,52 @@ $('#submit').on('click', function(){
   };
 
   // AJAX call
+  resolveVanityURL(id, platform);
+  // EO Ajax Call
+})
+// End of Submit
+
+
+function resolveVanityURL(identification, plat){
+  var id = identification;
+  var platform = plat;
+  var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
+
   $.ajax({
     method: 'GET',
-    url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
-    headers: {
-      'Authorization': 'Token ' + apikey
+    url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
+    success: function(response){
+      resolvedID = response.response.steamid;
+      $.ajax({
+        method: 'GET',
+        url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + resolvedID + "/",
+        headers: {
+          'Authorization': 'Token ' + apikey
+        }
+      }).done(function(data) {
+        console.log('Successfully Fetched Data:');
+        console.log(data);
+      });
+      console.log('End of AJAX call');
     }
-  }).done(function(data) {
-    console.log('Successfully Fetched Data:');
-    console.log(data);
-  });
-  console.log('End of AJAX call');
-  // EO Ajax Call
-});
+  })
+};
+
 
 
 // GET: /api/v1/<platform>/playerskills/<player_id>/
 // POST: /api/v1/<platform>/playerskills
+
+// function rlAjaxCall(console, id){
+//   $.ajax({
+//     method: 'GET',
+//     url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
+//     headers: {
+//       'Authorization': 'Token ' + apikey
+//     }
+//   }).done(function(data) {
+//     console.log('Successfully Fetched Data:');
+//     console.log(data);
+//   });
+//   console.log('End of AJAX call');
+// };
