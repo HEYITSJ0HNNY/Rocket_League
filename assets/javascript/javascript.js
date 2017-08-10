@@ -34,45 +34,47 @@ function getPopulation() {
 function getStatsValueForUser(identification, plat) {
     var id = identification;
     var platform = plat;
-    var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
+    // var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
     var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
-    var stats = statsArray[i];
 
-    if ($('#steam').hasClass("active")) {
-        for (var i = 0; i < statsArray.length; i++) {
-            $.ajax({
-                method: 'GET',
-                url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
-                success: function(response) {
-                    resolvedID = response.response.steamid;
-                    $.ajax({
-                        method: 'GET',
-                        url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
-                        headers: {
-                            'Authorization': 'Token ' + apikey
-                        }
-                    }).done(function(data) {
-                        console.log('Successfully Fetched Data:');
-                        console.log(data);
-                    }).done(function(error) {
-                        console.log('error');
-                    })
-                }
-            })
+        for( var i = 0; i < statsArray.length; i++){
+            var statistics = statsArray[i];
+            ajaxIfCalls(statistics, id, platform);
         }
-    } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
-        $.ajax({
-            method: 'GET',
-            url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
-            headers: {
-                'Authorization': 'Token ' + apikey
-            }
-        }).done(function(data) {
-            console.log(data);
-        });
-    } else {
-        $('#emptyPlatformModal').modal('show');
-    }
+    // if ($('#steam').hasClass("active")) {
+    //     for (var i = 0; i < statsArray.length; i++) {
+    //       var stats = statsArray[i];
+    //         $.ajax({
+    //             method: 'GET',
+    //             url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
+    //             success: function(response) {
+    //                 resolvedID = response.response.steamid;
+    //                 $.ajax({
+    //                     method: 'GET',
+    //                     url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
+    //                     headers: {
+    //                         'Authorization': 'Token ' + apikey
+    //                     }
+    //                 }).done(function(data) {
+    //                     console.log('Successfully Fetched Data:');
+    //                     console.log(data);
+    //                 })
+    //             }
+    //         })
+    //     }
+    // } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
+    //     $.ajax({
+    //         method: 'GET',
+    //         url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
+    //         headers: {
+    //             'Authorization': 'Token ' + apikey
+    //         }
+    //     }).done(function(data) {
+    //         console.log(data);
+    //     });
+    // } else {
+    //     $('#emptyPlatformModal').modal('show');
+    // }
 }
 
 function resolveVanityURL(identification, plat) {
@@ -174,3 +176,43 @@ $('#submit').on('click', function() {
     resolveVanityURL(id, platform);
     getStatsValueForUser(id, platform);
 })
+
+function ajaxIfCalls(statistics, id, platform){
+  var id = id;
+  var platform = platform;
+  var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
+  var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
+  var stats = statistics;
+
+  if ($('#steam').hasClass("active")) {
+          $.ajax({
+              method: 'GET',
+              url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
+              success: function(response) {
+                  resolvedID = response.response.steamid;
+                  $.ajax({
+                      method: 'GET',
+                      url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
+                      headers: {
+                          'Authorization': 'Token ' + apikey
+                      }
+                  }).done(function(data) {
+                      console.log('Successfully Fetched Data:');
+                      console.log(data);
+                  })
+              }
+          })
+  } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
+      $.ajax({
+          method: 'GET',
+          url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
+          headers: {
+              'Authorization': 'Token ' + apikey
+          }
+      }).done(function(data) {
+          console.log(data);
+      });
+  } else {
+      $('#emptyPlatformModal').modal('show');
+  }
+}
