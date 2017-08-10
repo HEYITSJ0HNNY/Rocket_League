@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
 <!--- Bootswatch Link --->
-<link rel="stylesheet" href="https://bootswatch.com/slate/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
 
 <!--- Custom CSS Link --->
 <link rel="stylesheet" href="./assets/css/css.css">
@@ -37,8 +37,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- Modal End -->
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+  <nav class="navbar navbar-default">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
           <span class="sr-only">Toggle navigation</span>
@@ -74,15 +73,64 @@
 
         </div>
     </div>
+    <div class="container" id="historyBar">
+        <div class="row">
+            <div class="col-xs-10" style="border: solid; height: 30px;"id="curSeasonLb"></div>
+        </div>
+    </div>
+  </div>
+  <!--- Where we will inject the data through jQuery-->
+  <div id="individualStats">
+    <div class="container">
+        <div class="row">
+          <div id="performance" class="col col-xs-10">
+            <div id="wins" class="col col-xs-1 stats">Wins
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+
+            <div id="goals" class="col col-xs-1 stats">Goals
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+            <div id="saves" class="col col-xs-1 stats">Saves
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+            <div id="shots" class="col col-xs-1 stats">Saves
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+            <div id="mvps" class="col col-xs-1 stats">MVP's
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+            <div id="assists" class="col col-xs-1 stats">Assists
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+            <div id="gsPercent" class="col col-xs-1 stats">Goal/Save %
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+            <div id="mvpWinPercent" class="col col-xs-1 stats">MVP/Win %
+              <div id="total">53,870</div>
+              <div id="rank">#1</div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+  <div class="container" id="homepageStats">
+      <div class="row">
+          <div class="col-xs-6" id="curSeasonLb">Current Season Leaderboards</div>
+          <div class="col-xs-6" id="lifetimeLb">Lifetime Leaderboards</div>
+      </div>
+  </div>
 
-<div class="container" id="homepageStats">
-    <div class="row">
-        <div class="col-xs-6" id="curSeasonLb">Current Season Leaderboards</div>
-        <div class="col-xs-6" id="lifetimeLb">Lifetime Leaderboards</div>
-    </div>
-</div>
+
+
 
 
 

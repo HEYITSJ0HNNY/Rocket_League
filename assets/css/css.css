@@ -1,9 +1,9 @@
-#steam{
-  background-image: url(../images/steam.png);
-  background-size:cover;
-  background-position: center;
-}
+/* NavBar customization */
+.navbar{
+  margin-bottom: 0px;
+  }
 
+/*Search bar and buttons */
 #ps4{
   background-image: url(../images/playstation.png);
   background-size:cover;
@@ -14,24 +14,59 @@
   background-image: url(../images/xbox.png);
   background-size:cover;
   background-position: center;
+
 }
-.search-btn .btn {
-  width:45px;
-  height:38px;
+
+#steam{
+  background-image: url(../images/steam.png);
+  background-size:cover;
+  background-position: center;
+}
+
+#ps4, #xbox, #steam {
+  width:47px;
+  height:43px;
   opacity: .5;
+  background-color: #464646;
 }
 
-#homepageSearch{
-  background-image: url(http://i.imgur.com/OkUXXji.png);
-  height: 100vh;
+.search-btn .active.btn{
+  opacity: .9 !important;
 }
 
-#individualStats{
-    background-image: url(http://i.imgur.com/OkUXXji.png);
-    height: 100vh;
+#submit{
+  text-align: center;
 }
 
 .mainSearch{
+  position: relative;
+  color: black;
+  font-size: 30px;
+  top: 100px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#homepageSearch{
+  background-image: url(../images/background);
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+#individualStats{
+    position: absolute;
+    top: 50%;
+    left: 13%;
+}
+
+
+
+#historyBar{
   position: relative;
   color: black;
   font-size: 30px;
@@ -60,8 +95,4 @@
 
 .stats{
   margin: 15px;
-}
-
-.search-btn .active.btn{
-  opacity: .9;
 }
