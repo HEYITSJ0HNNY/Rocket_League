@@ -1,17 +1,5 @@
 // Javascript written by Ritter Gustave
-
 var recentSearch = [];
-$.ajaxPrefilter(function(options) {
-    if (options.crossDomain && $.support.cors) {
-        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
-    }
-});
-
-function checkActive(item) {
-  $(item).siblings().removeClass("active");
-  $(item).toggleClass('active');
-}
-
 // Firebase initialization
 var config = {
   apiKey: "AIzaSyAf2Mv8BSPQn2d50Uu_rbP-V3V8rwtdqP0",
@@ -25,11 +13,66 @@ firebase.initializeApp(config);
 var database = firebase.database();
 // EO firebase initialization
 
-// Testing Firebase DB Grounds
-database.ref().on('value', function(snapshot){
-  console.log(snapshot.val());
-})
-// Testing Firebase DB Grounds
+$.ajaxPrefilter(function(options) {
+    if (options.crossDomain && $.support.cors) {
+        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+    }
+});
+
+function resolveVanityURL(identification, plat){
+  var id = identification;
+  var platform = plat;
+  var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
+
+  if ($('#steam').hasClass("active")){
+  $.ajax({
+    method: 'GET',
+    url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
+    success: function(response){
+      resolvedID = response.response.steamid;
+      $.ajax({
+        method: 'GET',
+        url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + resolvedID + "/",
+        headers: {
+          'Authorization': 'Token ' + apikey
+        }
+      }).done(function(data) {
+          console.log('Successfully Fetched Data:');
+          console.log(data);
+      });
+    }
+    })
+} else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')){
+    $.ajax({
+      method: 'GET',
+      url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
+      headers: {
+        'Authorization': 'Token ' + apikey
+      }
+  }).done(function(data){
+      console.log(data);
+  });
+} else {
+      $('#emptyPlatformModal').modal('show');
+}
+};
+
+function checkActive(item) {
+  $(item).siblings().removeClass("active");
+  $(item).toggleClass('active');
+}
+
+// ASK for API key, website only works with API key
+var apikey = localStorage.getItem('apikey');
+if (!apikey) {
+  $('#myModal').modal({ show: false });
+  $('#myModal').modal('show');
+  $('#saveKey').on('click', function(){
+    apikey = $('#apiKeyToken').val();
+    localStorage.setItem('apikey', apikey);
+    $('#myModal').modal('hide');
+  });
+};
 
 // Platform selection
 var platform;
@@ -56,87 +99,19 @@ $('#steam').on('click', function(){
 });
 // Platform selection end
 
-// ASK for API key, website only works with API key
-var apikey = localStorage.getItem('apikey');
-if (!apikey) {
-  $('#myModal').modal({ show: false });
-  $('#myModal').modal('show');
-  $('#saveKey').on('click', function(){
-    apikey = $('#apiKeyToken').val();
-    localStorage.setItem('apikey', apikey);
-    $('#myModal').modal('hide');
-  });
-};
-
 $('#submit').on('click', function(){
   var id = $('#inputSearch').val();
   if ( id === "" ){
-    alert("You need input!");
+    $('#inputEmptyModal').modal('show');
   } else {
     //Check to see if ID exists in the database (not working returns null)
     recentSearch.push(id);
     localStorage.setItem('recentSearch', JSON.stringify(recentSearch));
-    database.ref().child('rlstatsdb').orderByChild("searchTerm").equalTo(id).once("value", function(snapshot) {
-        var userData = snapshot.val();
-        console.log(snapshot.val());
-        if (userData){
-          console.log("exists!");
-        };
-    });
 
     database.ref().push({
       searchTerm: id,
       searchTermCount: 0
     });
   };
-
-  // AJAX call
   resolveVanityURL(id, platform);
-  // EO Ajax Call
 })
-// End of Submit
-
-
-function resolveVanityURL(identification, plat){
-  var id = identification;
-  var platform = plat;
-  var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
-
-  $.ajax({
-    method: 'GET',
-    url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
-    success: function(response){
-      resolvedID = response.response.steamid;
-      $.ajax({
-        method: 'GET',
-        url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + resolvedID + "/",
-        headers: {
-          'Authorization': 'Token ' + apikey
-        }
-      }).done(function(data) {
-        console.log('Successfully Fetched Data:');
-        console.log(data);
-      });
-      console.log('End of AJAX call');
-    }
-  })
-};
-
-
-
-// GET: /api/v1/<platform>/playerskills/<player_id>/
-// POST: /api/v1/<platform>/playerskills
-
-// function rlAjaxCall(console, id){
-//   $.ajax({
-//     method: 'GET',
-//     url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
-//     headers: {
-//       'Authorization': 'Token ' + apikey
-//     }
-//   }).done(function(data) {
-//     console.log('Successfully Fetched Data:');
-//     console.log(data);
-//   });
-//   console.log('End of AJAX call');
-// };
