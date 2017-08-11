@@ -102,6 +102,43 @@ function ajaxIfCalls(statistics, id, platform){
                   }).done(function(data) {
                       console.log('Successfully Fetched Data:');
                       console.log(data);
+                      //$("#curSeasonLb").append(data[0].value);
+                      //console.log("Data.Value: " + data[0].value);
+
+                      $("#individualStats").show();
+
+                      if ( stats === "wins"){
+                        $("#winTotal").empty();
+                        $("#winTotal").append(data[0].value);
+
+
+
+
+
+                    } else if ( stats === "goals"){
+
+                        $("#goalTotal").empty();
+                        $("#goalTotal").append(data[0].value);
+
+                    }else if ( stats === "saves"){
+
+                          $("#saveTotal").empty();
+                          $("#saveTotal").append(data[0].value);
+
+                    }else if ( stats === "shots"){
+                          $("#shotTotal").empty();
+                          $("#shotTotal").append(data[0].value);
+
+                    }else if ( stats === "mvps"){
+                          $("#mvpTotal").empty();
+                          $("#mvpTotal").append(data[0].value);
+
+                    }else if ( stats === "assists"){
+                      $("#assistsTotal").empty();
+                      $("#assistsTotal").append(data[0].value);
+
+                              }
+
                   })
               }
           })
@@ -180,5 +217,10 @@ $('#submit').on('click', function() {
 
         resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
+
+
+      //  if($("#wins").length){
+      //    $("#wins").empty();
+        //}
     };
 })
