@@ -192,9 +192,9 @@ var chart = new Chart(ctx, {
     data: {
         labels: ["Goals", "Assists", "Saves"],
         datasets: [{
-            label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
+            label: "My First dataset",  
+            backgroundColor: ["#9933ff", "#ff0000", "#ffff00"],
+            borderColor: 'rgb(255, 255, 255)',
             data: [100, 40, 300],
         }]
     },
