@@ -75,24 +75,19 @@
   justify-content: center;
 }
 
-#curSeasonLb{
-  text-align: center;
-
-}
-
 #lifetimeLb{
   text-align: center;
 
 }
 
-#performance{
+/*#performance{
   border: solid;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+*/
 .stats{
   margin: 15px;
 }
