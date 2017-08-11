@@ -182,3 +182,23 @@ $('#submit').on('click', function() {
         getStatsValueForUser(id, platform);
     };
 })
+
+var ctx = $("#playStyle")
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'doughnut',
+
+    // The data for our dataset
+    data: {
+        labels: ["Goals", "Assists", "Saves"],
+        datasets: [{
+            label: "My First dataset",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [100, 40, 300],
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
