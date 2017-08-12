@@ -94,8 +94,8 @@
   margin: 15px;
 }
 
-#playStyle{
-  background-color: none;
-  height: 150px;
-  width: 150px;
+
+.chartContainer{
+  height: 500px;
+  width: 500px;
 }

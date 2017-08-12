@@ -231,6 +231,7 @@ $('#submit').on('click', function() {
     };
 })
 
+
 var chartStats = {
         assists: "",
         goals: "",
@@ -244,7 +245,7 @@ function graph(){
   var ctx = $("#playStyle")
   var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'doughnut',
+    type: "doughnut",
 
     // The data for our dataset
     data: {
