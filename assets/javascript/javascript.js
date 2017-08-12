@@ -27,8 +27,22 @@ function getPopulation() {
             'Authorization': 'Token ' + apikey
         }
     }).done(function(popData) {
-        console.log(popData);
+        database.ref().set({
+          PopObject: popData
+        })
     });
+
+    database.ref().on('value', function (snap) {
+      console.log(snap.val());
+      //Value for Steam players playing ranked solo duel
+      console.log("Ranked Solo Duel",snap.val().PopObject.Steam[10].NumPlayers);
+      // Value for steam players playing ranked team doubles
+      console.log("Ranked team doubles",snap.val().PopObject.Steam[11].NumPlayers);
+      // Value for steam players playing ranked solo standard
+      console.log("Ranked solo standard",snap.val().PopObject.Steam[12].NumPlayers);
+      // Value for steam players playing ranked team standard
+      console.log("Ranked team standard",snap.val().PopObject.Steam[13].NumPlayers);
+    })
 }
 
 function getStatsValueForUser(identification, plat) {
@@ -111,17 +125,11 @@ function ajaxIfCalls(statistics, id, platform){
                         $("#winTotal").empty();
                         $("#winTotal").append(data[0].value);
 
-
-
-
-
                     } else if ( stats === "goals"){
-
                         $("#goalTotal").empty();
                         $("#goalTotal").append(data[0].value);
 
                     }else if ( stats === "saves"){
-
                           $("#saveTotal").empty();
                           $("#saveTotal").append(data[0].value);
 
@@ -218,13 +226,16 @@ $('#submit').on('click', function() {
         resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
 
-
-      //  if($("#wins").length){
-      //    $("#wins").empty();
-        //}
     };
 })
 
+// Query API every 1 minute for population data
+  getPopulation();
+setInterval(function () {
+  getPopulation();
+}, 60000);
+
+// Begin char display
 var ctx = $("#playStyle")
 var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -234,7 +245,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: ["Goals", "Assists", "Saves"],
         datasets: [{
-            label: "My First dataset",  
+            label: "My First dataset",
             backgroundColor: ["#9933ff", "#ff0000", "#ffff00"],
             borderColor: 'rgb(255, 255, 255)',
             data: [100, 40, 300],
