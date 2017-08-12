@@ -93,3 +93,9 @@
 .stats{
   margin: 15px;
 }
+
+#playStyle{
+  background-color: none;
+  height: 150px;
+  width: 150px;
+}
