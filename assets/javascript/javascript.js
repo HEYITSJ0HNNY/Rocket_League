@@ -42,7 +42,17 @@ function getPopulation() {
       console.log("Ranked solo standard",snap.val().PopObject.Steam[12].NumPlayers);
       // Value for steam players playing ranked team standard
       console.log("Ranked team standard",snap.val().PopObject.Steam[13].NumPlayers);
+
+      $("#rankedSoloDuel").text("Ranked Solo Duel: " + snap.val().PopObject.Steam[10].NumPlayers);
+
+      $("#rankedDoubles").text("Ranked Doubles: " + snap.val().PopObject.Steam[11].NumPlayers);
+
+      $("#rankedSoloStandard").text("Ranked Solo Standard: " + snap.val().PopObject.Steam[12].NumPlayers);
+
+      $("#rankedTeamStandard").text("Ranked Team Standard: " + snap.val().PopObject.Steam[13].NumPlayers)
+
     })
+
 }
 
 function getStatsValueForUser(identification, plat) {
@@ -94,6 +104,7 @@ function resolveVanityURL(identification, plat) {
     }
 };
 
+var completedRequests = 0;
 
 
 function ajaxIfCalls(statistics, id, platform){
@@ -102,6 +113,8 @@ function ajaxIfCalls(statistics, id, platform){
   var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
   var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
   var stats = statistics;
+
+
 
   if ($('#steam').hasClass("active")) {
           $.ajax({
@@ -116,6 +129,7 @@ function ajaxIfCalls(statistics, id, platform){
                           'Authorization': 'Token ' + apikey
                       }
                   }).done(function(data) {
+
                       console.log('Successfully Fetched Data:');
                       console.log(data);
                       //$("#curSeasonLb").append(data[0].value);
@@ -131,11 +145,14 @@ function ajaxIfCalls(statistics, id, platform){
                         $("#goalTotal").empty();
                         $("#goalTotal").append(data[0].value);
                         chartStats.goals = data[0].value;
+                        completedRequests++;
 
                     }else if ( stats === "saves"){
                           $("#saveTotal").empty();
                           $("#saveTotal").append(data[0].value);
                           chartStats.saves = data[0].value;
+                          completedRequests++;
+
 
                     }else if ( stats === "shots"){
                           $("#shotTotal").empty();
@@ -149,11 +166,13 @@ function ajaxIfCalls(statistics, id, platform){
                       $("#assistsTotal").empty();
                       $("#assistsTotal").append(data[0].value);
                       chartStats.assists = data[0].value;
+                      completedRequests++;
+
 
                               }
-                      graph();
-                  })
-              }
+                    graph();
+              })
+            }
           })
 
 
@@ -170,6 +189,9 @@ function ajaxIfCalls(statistics, id, platform){
   } else {
       $('#emptyPlatformModal').modal('show');
   }
+}
+if(completedRequests === 3 ){
+  graph();
 }
 
 function checkActive(item) {
@@ -251,24 +273,28 @@ var chartStats = {
 }
 
 function graph(){
-  Chart.defaults.global.defaultFontColor = 'white';
-  var ctx = $("#playStyle")
-  var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: "doughnut",
 
-    // The data for our dataset
-    data: {
-        labels: ["Goals", "Assists", "Saves"],
-        datasets: [{
-            label: "My First dataset",
-            backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
-            borderColor: 'rgb(255, 255, 255)',
-            data: [chartStats.goals, chartStats.assists, chartStats.saves],
-        }]
-    },
+  if(completedRequests === 3 ){
+    Chart.defaults.global.defaultFontColor = 'white';
+    var ctx = $("#playStyle")
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: "doughnut",
 
-    // Configuration options go here
-    options: {}
-  });
+      // The data for our dataset
+      data: {
+          labels: ["Goals", "Assists", "Saves"],
+          datasets: [{
+              label: "My First dataset",
+              backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
+              borderColor: 'rgb(255, 255, 255)',
+              data: [chartStats.goals, chartStats.assists, chartStats.saves],
+          }]
+      },
+
+      // Configuration options go here
+      options: {}
+    });
+
+  }
 }
