@@ -94,6 +94,8 @@ function resolveVanityURL(identification, plat) {
     }
 };
 
+
+
 function ajaxIfCalls(statistics, id, platform){
   var id = id;
   var platform = platform;
@@ -128,10 +130,12 @@ function ajaxIfCalls(statistics, id, platform){
                     } else if ( stats === "goals"){
                         $("#goalTotal").empty();
                         $("#goalTotal").append(data[0].value);
+                        chartStats.goals = data[0].value;
 
                     }else if ( stats === "saves"){
                           $("#saveTotal").empty();
                           $("#saveTotal").append(data[0].value);
+                          chartStats.saves = data[0].value;
 
                     }else if ( stats === "shots"){
                           $("#shotTotal").empty();
@@ -144,12 +148,15 @@ function ajaxIfCalls(statistics, id, platform){
                     }else if ( stats === "assists"){
                       $("#assistsTotal").empty();
                       $("#assistsTotal").append(data[0].value);
+                      chartStats.assists = data[0].value;
 
                               }
-
+                      graph();
                   })
               }
           })
+
+
   } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
       $.ajax({
           method: 'GET',
@@ -229,17 +236,25 @@ $('#submit').on('click', function() {
     };
 })
 
+
 // Query API every 1 minute for population data
   getPopulation();
 setInterval(function () {
   getPopulation();
 }, 60000);
 
-// Begin char display
-var ctx = $("#playStyle")
-var chart = new Chart(ctx, {
+
+var chartStats = {
+        assists: "",
+        goals: "",
+        saves: ""
+}
+
+function graph(){
+  var ctx = $("#playStyle")
+  var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'doughnut',
+    type: "doughnut",
 
     // The data for our dataset
     data: {
@@ -248,10 +263,11 @@ var chart = new Chart(ctx, {
             label: "My First dataset",
             backgroundColor: ["#9933ff", "#ff0000", "#ffff00"],
             borderColor: 'rgb(255, 255, 255)',
-            data: [100, 40, 300],
+            data: [chartStats.goals, chartStats.assists, chartStats.saves],
         }]
     },
 
     // Configuration options go here
     options: {}
-});
+  });
+}
