@@ -183,19 +183,19 @@ $('#submit').on('click', function() {
     };
 })
 
-var ctx = $("#playStyle")
+var ctx = $("#playStyle");
 var chart = new Chart(ctx, {
     // The type of chart we want to create
-    type: 'doughnut',
+    type: "doughnut",
 
     // The data for our dataset
     data: {
-        labels: ["Goals", "Assists", "Saves"],
+        labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [{
-            label: "My First dataset",  
-            backgroundColor: ["#9933ff", "#ff0000", "#ffff00"],
-            borderColor: 'rgb(255, 255, 255)',
-            data: [100, 40, 300],
+            label: "My First dataset",
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45],
         }]
     },
 
