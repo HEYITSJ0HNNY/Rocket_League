@@ -80,6 +80,8 @@ function resolveVanityURL(identification, plat) {
     }
 };
 
+
+
 function ajaxIfCalls(statistics, id, platform){
   var id = id;
   var platform = platform;
@@ -114,16 +116,17 @@ function ajaxIfCalls(statistics, id, platform){
 
 
 
-
                     } else if ( stats === "goals"){
 
                         $("#goalTotal").empty();
                         $("#goalTotal").append(data[0].value);
+                        chartStats.goals = data[0].value;
 
                     }else if ( stats === "saves"){
 
                           $("#saveTotal").empty();
                           $("#saveTotal").append(data[0].value);
+                          chartStats.saves = data[0].value;
 
                     }else if ( stats === "shots"){
                           $("#shotTotal").empty();
@@ -136,12 +139,15 @@ function ajaxIfCalls(statistics, id, platform){
                     }else if ( stats === "assists"){
                       $("#assistsTotal").empty();
                       $("#assistsTotal").append(data[0].value);
+                      chartStats.assists = data[0].value;
 
                               }
-
+                      graph();
                   })
               }
           })
+
+
   } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
       $.ajax({
           method: 'GET',
@@ -225,22 +231,34 @@ $('#submit').on('click', function() {
     };
 })
 
-var ctx = $("#playStyle");
-var chart = new Chart(ctx, {
+
+var chartStats = {
+        assists: "",
+        goals: "",
+        saves: ""
+}
+
+console.log("chart stats: " + chartStats);
+
+
+function graph(){
+  var ctx = $("#playStyle")
+  var chart = new Chart(ctx, {
     // The type of chart we want to create
     type: "doughnut",
 
     // The data for our dataset
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Goals", "Assists", "Saves"],
         datasets: [{
             label: "My First dataset",
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45],
+            backgroundColor: ["#9933ff", "#ff0000", "#ffff00"],
+            borderColor: 'rgb(255, 255, 255)',
+            data: [chartStats.goals, chartStats.assists, chartStats.saves],
         }]
     },
 
     // Configuration options go here
     options: {}
-});
+  });
+}
