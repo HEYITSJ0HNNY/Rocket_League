@@ -96,6 +96,16 @@
 
 
 .chartContainer{
-  height: 500px;
-  width: 500px;
+  height: 275px;
+  width: 275px;
+  position: relative;
+  top: 50%;
+  left: 13%;
+}
+
+.canIPutThisHere{
+  position: fixed;
+  top: 52px;
+  right: 0px;
+  width: 240px;
 }

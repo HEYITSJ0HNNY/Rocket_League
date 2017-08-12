@@ -251,6 +251,7 @@ var chartStats = {
 }
 
 function graph(){
+  Chart.defaults.global.defaultFontColor = 'white';
   var ctx = $("#playStyle")
   var chart = new Chart(ctx, {
     // The type of chart we want to create
@@ -261,7 +262,7 @@ function graph(){
         labels: ["Goals", "Assists", "Saves"],
         datasets: [{
             label: "My First dataset",
-            backgroundColor: ["#9933ff", "#ff0000", "#ffff00"],
+            backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
             borderColor: 'rgb(255, 255, 255)',
             data: [chartStats.goals, chartStats.assists, chartStats.saves],
         }]
