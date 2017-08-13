@@ -94,7 +94,6 @@
     </div>
   </nav>
   <!--- Search Bar--->
-  <form class="form-horizontal" id="thisForm">
   <div id="homepageSearch">
     <div class="container">
       <div class="row mainSearch">
@@ -105,9 +104,7 @@
               <button id="ps4" class="btn btn-default" type="button"></button>
               <button id="xbox" class="btn btn-default" type="button"></button>
             </span>
-            <input id="inputSearch" type="text" class="form-control" placeholder="Search for...">  <span class="input-group-btn search-btn">
-                <button id="submit" class="btn btn-default" type="submit">GO!</button></span>
-              </form>
+            <input id="inputSearch" type="text" class="form-control" placeholder="Search for...">  <span class="input-group-btn search-btn"><button id="submit" class="btn btn-default" type="button">GO!</button></span>
           </div>
 
         </div>
@@ -166,18 +163,20 @@
       </div>
     </div>
     <p id="chartTitle">Playstyle</p>
-
     <!-- graph shows goals/saves/assists -->
     <div class="chartContainer">
       <canvas id="playStyle" class="chartjs"></canvas>
     </div>
   </div>
+
 </div>
 <footer class="footer">
        <p class="footerText">© The Dream Team 2017</p>
 </footer>
 
-</div>
+
+
+
 
   <!-- chart.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
