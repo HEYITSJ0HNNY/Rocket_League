@@ -1,5 +1,25 @@
 // Javascript written by Ritter Gustave
+var chartStats = {
+  assists: "",
+  goals: "",
+  saves: ""
+}
 var recentSearch = [];
+var completedRequests = 0;
+var platform;
+// ASK for API key, website only works with API key
+var apikey = localStorage.getItem('apikey');
+if (!apikey) {
+  $('#myModal').modal({
+    show: false
+  });
+  $('#myModal').modal('show');
+  $('#saveKey').on('click', function() {
+    apikey = $('#apiKeyToken').val();
+    localStorage.setItem('apikey', apikey);
+    $('#myModal').modal('hide');
+  });
+};
 // Firebase initialization
 var config = {
     apiKey: "AIzaSyAf2Mv8BSPQn2d50Uu_rbP-V3V8rwtdqP0",
@@ -55,7 +75,6 @@ function getPopulation() {
 
 }
 
-
 function getStatsValueForUser(identification, plat) {
     var id = identification;
     var platform = plat;
@@ -105,9 +124,6 @@ function resolveVanityURL(identification, plat) {
     }
 };
 
-var completedRequests = 0;
-
-
 function ajaxIfCalls(statistics, id, platform){
   var id = id;
   var platform = platform;
@@ -118,75 +134,75 @@ function ajaxIfCalls(statistics, id, platform){
 
 
   if ($('#steam').hasClass("active")) {
-          $.ajax({
-              method: 'GET',
-              url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
-              success: function(response) {
-                  resolvedID = response.response.steamid;
-                  $.ajax({
-                      method: 'GET',
-                      url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
-                      headers: {
-                          'Authorization': 'Token ' + apikey
-                      }
-                  }).done(function(data) {
+    $.ajax({
+      method: 'GET',
+      url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
+      success: function(response) {
+        resolvedID = response.response.steamid;
+        $.ajax({
+          method: 'GET',
+          url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
+          headers: {
+            'Authorization': 'Token ' + apikey
+          }
+        }).done(function(data) {
 
-                      console.log('Successfully Fetched Data:');
-                      console.log(data);
+          console.log('Successfully Fetched Data:');
+          console.log(data);
 
-                      $("#individualStats").show();
+          $("#individualStats").show();
 
-                      if ( stats === "wins"){
-                        $("#winTotal").empty();
-                        $("#winTotal").append(data[0].value);
+          if ( stats === "wins"){
+            $("#winTotal").empty();
+            $("#winTotal").append(data[0].value);
 
-                    } else if ( stats === "goals"){
-                        $("#goalTotal").empty();
-                        $("#goalTotal").append(data[0].value);
-                        chartStats.goals = data[0].value;
-                        completedRequests++;
+          } else if ( stats === "goals"){
+            $("#goalTotal").empty();
+            $("#goalTotal").append(data[0].value);
+            chartStats.goals = data[0].value;
+            completedRequests++;
 
-                    }else if ( stats === "saves"){
-                          $("#saveTotal").empty();
-                          $("#saveTotal").append(data[0].value);
-                          chartStats.saves = data[0].value;
-                          completedRequests++;
-
-
-                    }else if ( stats === "shots"){
-                          $("#shotTotal").empty();
-                          $("#shotTotal").append(data[0].value);
-
-                    }else if ( stats === "mvps"){
-                          $("#mvpTotal").empty();
-                          $("#mvpTotal").append(data[0].value);
-
-                    }else if ( stats === "assists"){
-                      $("#assistsTotal").empty();
-                      $("#assistsTotal").append(data[0].value);
-                      chartStats.assists = data[0].value;
-                      completedRequests++;
+          }else if ( stats === "saves"){
+            $("#saveTotal").empty();
+            $("#saveTotal").append(data[0].value);
+            chartStats.saves = data[0].value;
+            completedRequests++;
 
 
-                              }
-                    graph();
-              })
-            }
-          })
+          }else if ( stats === "shots"){
+            $("#shotTotal").empty();
+            $("#shotTotal").append(data[0].value);
+
+          }else if ( stats === "mvps"){
+            $("#mvpTotal").empty();
+            $("#mvpTotal").append(data[0].value);
+
+          }else if ( stats === "assists"){
+            $("#assistsTotal").empty();
+            $("#assistsTotal").append(data[0].value);
+            chartStats.assists = data[0].value;
+            completedRequests++;
+
+
+          }
+          graph();
+        })
+      }
+    })
 
 
   } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
-      $.ajax({
-          method: 'GET',
-          url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
-          headers: {
-              'Authorization': 'Token ' + apikey
-          }
-      }).done(function(data) {
-          console.log(data);
-      });
+    $.ajax({
+      method: 'GET',
+      url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
+      headers: {
+        'Authorization': 'Token ' + apikey
+      }
+    }).done(function(data) {
+      console.log(data);
+    });
   } else {
-      $('#emptyPlatformModal').modal('show');
+    $('#emptyPlatformModal').modal('show');
   }
 }
 if(completedRequests === 3 ){
@@ -194,26 +210,65 @@ if(completedRequests === 3 ){
 }
 
 function checkActive(item) {
-    $(item).siblings().removeClass("active");
-    $(item).toggleClass('active');
+  $(item).siblings().removeClass("active");
+  $(item).toggleClass('active');
 }
 
-// ASK for API key, website only works with API key
-var apikey = localStorage.getItem('apikey');
-if (!apikey) {
-    $('#myModal').modal({
-        show: false
+function getLeaderBoardData(selection, playlist){
+  var htmlhook = selection;
+  var playlist = playlist;
+
+  $.ajax({
+    method: 'GET',
+    url: "https://api.rocketleague.com/api/v1/" + "steam" + "/leaderboard/skills/" + playlist + "/",
+    headers: {
+      'Authorization': 'Token ' + apikey
+    }
+  }).done ( function (data){
+    console.log(data);
+    for ( var i = 0; i < 51; i++ ){
+      var newtr = $("<tr>");
+      $(htmlhook).append("<tr><th>" + (i + 1) + "</th>" +
+      "<td>" + data[i].user_name  + "</td>" +
+      "<td>" + data[i].skill     + "</td>" +
+      "<td>" + data[i].tier      + "</td></tr>")
+          }
+      })
+}
+
+function generateLeaderBoard(){
+  getLeaderBoardData("#ranked2v2body", 11);
+  getLeaderBoardData("#ranked3v3body", 13);
+  getLeaderBoardData("#rankedduels", 10);
+}
+
+function graph(){
+
+  if(completedRequests === 3 ){
+    Chart.defaults.global.defaultFontColor = 'white';
+    var ctx = $("#playStyle")
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: "doughnut",
+
+      // The data for our dataset
+      data: {
+        labels: ["Goals", "Assists", "Saves"],
+        datasets: [{
+          label: "My First dataset",
+          backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
+          borderColor: 'rgb(255, 255, 255)',
+          data: [chartStats.goals, chartStats.assists, chartStats.saves],
+        }]
+      },
+      // Configuration options go here
+      options: {}
     });
-    $('#myModal').modal('show');
-    $('#saveKey').on('click', function() {
-        apikey = $('#apiKeyToken').val();
-        localStorage.setItem('apikey', apikey);
-        $('#myModal').modal('hide');
-    });
-};
+
+  }
+}
 
 // Platform selection
-var platform;
 $('#ps4').on('click', function() {
     platform = "ps4";
     if (platform === "ps4") {
@@ -237,37 +292,9 @@ $('#steam').on('click', function() {
 });
 // Platform selection end
 
-function getLeaderBoardData(selection, playlist){
-      var htmlhook = selection;
-      var playlist = playlist;
-
-      $.ajax({
-          method: 'GET',
-          url: "https://api.rocketleague.com/api/v1/" + "steam" + "/leaderboard/skills/" + playlist + "/",
-          headers: {
-              'Authorization': 'Token ' + apikey
-            }
-      }).done ( function (data){
-          console.log(data);
-          for ( var i = 0; i < 51; i++ ){
-              var newtr = $("<tr>");
-              $(htmlhook).append("<tr><th>" + (i + 1) + "</th>" +
-                           "<td>" + data[i].user_name  + "</td>" +
-                           "<td>" + data[i].skill     + "</td>" +
-                           "<td>" + data[i].tier      + "</td></tr>")
-          }
-      })
-}
-
 // Generating Leaderboard Data on Index 2
-function generateLeaderBoard(){
-    getLeaderBoardData("#ranked2v2body", 11);
-    getLeaderBoardData("#ranked3v3body", 13);
-    getLeaderBoardData("#rankedduels", 10);
-}
-
 generateLeaderBoard();
-// EO Generating Leaderboard data
+// Generating Leaderboard data end
 
 $('#submit').on('click', function() {
     var id = $('#inputSearch').val();
@@ -289,42 +316,8 @@ $('#submit').on('click', function() {
     };
 })
 
-
 // Query API every 1 minute for population data
 getPopulation();
 setInterval(function () {
     getPopulation();
 }, 60000);
-
-
-var chartStats = {
-        assists: "",
-        goals: "",
-        saves: ""
-}
-
-function graph(){
-
-  if(completedRequests === 3 ){
-    Chart.defaults.global.defaultFontColor = 'white';
-    var ctx = $("#playStyle")
-    var chart = new Chart(ctx, {
-      // The type of chart we want to create
-      type: "doughnut",
-
-      // The data for our dataset
-      data: {
-          labels: ["Goals", "Assists", "Saves"],
-          datasets: [{
-              label: "My First dataset",
-              backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
-              borderColor: 'rgb(255, 255, 255)',
-              data: [chartStats.goals, chartStats.assists, chartStats.saves],
-          }]
-      },
-      // Configuration options go here
-      options: {}
-    });
-
-  }
-}
