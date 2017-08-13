@@ -9,11 +9,12 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
 
 <!--- Custom CSS Link --->
-<link rel="stylesheet" href="./assets/css/css.css">
+<link rel="stylesheet" href="assets/css/css.css">
 
 
 
   <title>Rocket Stats</title>
+  <link rel="icon" type="image/png" href="assets/images/gc.png" />
 </head>
 <body>
 
@@ -86,9 +87,7 @@
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="#">Individual Stats<span class="sr-only">(current)</span></a></li>
-          <li><a href="#">Population</a></li>
-          <li><a href="#">Leaderboards</a></li>
+          <li><a href="index2.html">Leaderboards</a></li>
         </ul>
       </div>
     </div>
@@ -111,6 +110,14 @@
     </div>
       <div class="canIPutThisHere">
         <iframe src="https://open.spotify.com/embed/album/7r2p8wfr3ML0MsNUoW3I9H" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+      <div class="popIt">
+          <div class="well well-lg">
+            <p id="rankedSoloDuel"></p>
+            <p id="rankedDoubles"></p>
+            <p id="rankedSoloStandard"></p>
+            <p id="rankedTeamStandard"></p>
+        </div>
       </div>
     <div class="container" id="historyBar">
         <div class="row">
@@ -153,20 +160,15 @@
         </div>
       </div>
     </div>
+    <!-- graph shows goals/saves/assists -->
+    <div class="chartContainer">
+      <canvas id="playStyle" class="chartjs"></canvas>
+    </div>
   </div>
-  <!-- graph shows goals/saves/assists -->
-  <div class="chartContainer">
-    <canvas id="playStyle" class="chartjs"></canvas>
-  </div>
+
 </div>
 
 
-  <div class="container" id="homepageStats">
-      <div class="row">
-          <div class="col-xs-6" id="curSeasonLb">Current Season Leaderboards</div>
-          <div class="col-xs-6" id="lifetimeLb">Lifetime Leaderboards</div>
-      </div>
-  </div>
 
 
 

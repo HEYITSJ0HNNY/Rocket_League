@@ -3,6 +3,10 @@
   margin-bottom: 0px;
   }
 
+.navbar-brand{
+  background-image: url(../images/gc.png);
+}
+
 /*Search bar and buttons */
 #ps4{
   background-image: url(../images/playstation.png);
@@ -58,12 +62,23 @@
 
 }
 
+.leaderboardPage{
+  background-image: url(../images/background);
+  height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 #individualStats{
     position: absolute;
     top: 50%;
-    left: 13%;
+    left: 25%;
     color: white;
     display: none;
+    background-color: black;
+    opacity: .8;
+    width: 48%;
 }
 
 
@@ -98,9 +113,6 @@
 .chartContainer{
   height: 275px;
   width: 275px;
-  position: relative;
-  top: 50%;
-  left: 13%;
 }
 
 .canIPutThisHere{
@@ -108,4 +120,28 @@
   top: 52px;
   right: 0px;
   width: 240px;
+  height: 100px;
+}
+
+.well{
+  background-color: black;
+  color: white;
+  height: 100px;
+  width: 150px;
+  position: absolute;
+  top: 52px;
+  left: 0px;
+  border-color: black;
+}
+
+#rankedSoloDuel{
+  color: white;
+}
+
+#rankedTwos, #rankedThrees, #rankedDuels{
+  background-color: black;
+  opacity: .8;
+  color: white;
+  text-align: center;
+  margin-top: 50px;
 }
