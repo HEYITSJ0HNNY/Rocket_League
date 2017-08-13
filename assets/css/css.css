@@ -72,6 +72,7 @@
 }
 #individualStats{
     position: absolute;
+    top: 50%;
     top: 40%;
     left: 25%;
     color: white;
@@ -114,6 +115,38 @@
 .chartContainer{
   height: 275px;
   width: 275px;
+}
+
+.canIPutThisHere{
+  position: fixed;
+  top: 52px;
+  right: 0px;
+  width: 240px;
+  height: 100px;
+}
+
+.well{
+  background-color: black;
+  color: white;
+  height: 100px;
+  width: 150px;
+  position: absolute;
+  top: 52px;
+  left: 0px;
+  border-color: black;
+}
+
+#rankedSoloDuel{
+  color: white;
+}
+
+#rankedTwos, #rankedThrees, #rankedDuels{
+  background-color: black;
+  opacity: .8;
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+=======
   margin: auto;
   margin-bottom: 15px;
 

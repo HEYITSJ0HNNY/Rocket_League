@@ -7,18 +7,13 @@
 
 <!--- Bootswatch Link --->
 <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.min.css">
-
 <!--- Custom CSS Link --->
 <link rel="stylesheet" href="./assets/css/css.css">
-
-
-
   <title>Rocket Stats</title>
   <link rel="icon" type="image/png" href="assets/images/gc.png" />
 
 </head>
 <body>
-
   <nav class="navbar navbar-default">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -29,14 +24,68 @@
         </button>
         <a class="navbar-brand" href="index.html">Rocket Stats</a>
       </div>
-
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
         <ul class="nav navbar-nav navbar-right">
+
+          <li><a href="#">Leaderboards</a></li>
+        </ul>
           <li><a href="about.html">About</a></li>
-          <li><a href="index2.html">Leaderboards</a></li>        </ul>
+          <li><a href="index2.html">Leaderboards</a></li>      
+        </ul>
       </div>
     </div>
   </nav>
+<div class="leaderboardPage">
+  <div class="container" id="homepageStats">
+      <div class="row">
+          <div class="col-xs-4" id="rankedTwos">
+            <table class="table">
+              <thead>
+                <p>Ranked 2v2</p>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Skill</th>
+                  <th>Tier</th>
+                </tr>
+              </thead>
+              <tbody id="ranked2v2body">
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-4" id="rankedThrees">
+            <table class="table">
+              <thead>
+                <p>Ranked 3v3</p>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Skill</th>
+                  <th>Tier</th>
+                </tr>
+              </thead>
+              <tbody id="ranked3v3body">
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-4" id="rankedDuels">
+            <table class="table">
+              <thead>
+                <p>Ranked duels</p>
+                <tr>
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>Skill</th>
+                  <th>Tier</th>
+                </tr>
+              </thead>
+              <tbody id="rankedduels">
+              </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
+</div>
 
 <div class="leaderboardPage">
   <div class="container" id="homepageStats">
@@ -49,23 +98,20 @@
   </div>
 </div>
 
-
-
-
-
+<!-- chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<!-- Firebase Link -->
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<!--- jQuery Link --->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap js -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!--- JavaScript Link --->
+<script type="text/javascript" src="assets/javascript/javascript.js"></script>
 
 <footer class="footer">
        <p class="footerText">© The Dream Team 2017</p>
 </footer>
 
-
-
-
-
-  <!--- jQuery Link --->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
-  <!--- JavaScript Link --->
-  <script type="text/javascript" src="assets/javascript/javascript.js"></script>
 </body>
 </html>
