@@ -131,7 +131,64 @@ function ajaxIfCalls(statistics, id, platform){
   var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
   var stats = statistics;
 
+  if ($('#steam').hasClass("active")) {
+          $.ajax({
+              method: 'GET',
+              url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
+              success: function(response) {
+                  resolvedID = response.response.steamid;
+                  $.ajax({
+                      method: 'GET',
+                      url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
+                      headers: {
+                          'Authorization': 'Token ' + apikey
+                      }
+                  }).done(function(data) {
 
+                      console.log('Successfully Fetched Data:');
+                      console.log(data);
+                      //$("#curSeasonLb").append(data[0].value);
+                      //console.log("Data.Value: " + data[0].value);
+
+                      $("#individualStats").show();
+
+                      if ( stats === "wins"){
+                        $("#winTotal").empty();
+                        $("#winTotal").append(data[0].value);
+
+                    } else if ( stats === "goals"){
+                        $("#goalTotal").empty();
+                        $("#goalTotal").append(data[0].value);
+                        chartStats.goals = data[0].value;
+                        completedRequests++;
+
+                    }else if ( stats === "saves"){
+                          $("#saveTotal").empty();
+                          $("#saveTotal").append(data[0].value);
+                          chartStats.saves = data[0].value;
+                          completedRequests++;
+
+
+                    }else if ( stats === "shots"){
+                          $("#shotTotal").empty();
+                          $("#shotTotal").append(data[0].value);
+
+                    }else if ( stats === "mvps"){
+                          $("#mvpTotal").empty();
+                          $("#mvpTotal").append(data[0].value);
+
+                    }else if ( stats === "assists"){
+                      $("#assistsTotal").empty();
+                      $("#assistsTotal").append(data[0].value);
+                      chartStats.assists = data[0].value;
+                      completedRequests++;
+
+
+                              }
+                    graph();
+              })
+            }
+          })
 
   if ($('#steam').hasClass("active")) {
     $.ajax({
@@ -292,11 +349,16 @@ $('#steam').on('click', function() {
 });
 // Platform selection end
 
+
 // Generating Leaderboard Data on Index 2
 generateLeaderBoard();
 // Generating Leaderboard data end
 
 $('#submit').on('click', function() {
+
+$('#thisForm').on('submit', function(event) {
+  event.preventDefault();
+
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -304,7 +366,6 @@ $('#submit').on('click', function() {
         //Check to see if ID exists in the database (not working returns null)
         recentSearch.push(id);
         localStorage.setItem('recentSearch', JSON.stringify(recentSearch));
-
         database.ref().push({
             searchTerm: id,
             searchTermCount: 0
@@ -312,8 +373,8 @@ $('#submit').on('click', function() {
 
         resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
+    };event.preventDefault();
 
-    };
 })
 
 // Query API every 1 minute for population data
@@ -321,3 +382,36 @@ getPopulation();
 setInterval(function () {
     getPopulation();
 }, 60000);
+
+var chartStats = {
+        assists: "",
+        goals: "",
+        saves: ""
+}
+
+function graph(){
+
+  if(completedRequests === 3 ){
+    Chart.defaults.global.defaultFontColor = 'white';
+    var ctx = $("#playStyle")
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: "doughnut",
+
+      // The data for our dataset
+      data: {
+          labels: ["Goals", "Assists", "Saves"],
+          datasets: [{
+              label: "My First dataset",
+              backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
+              borderColor: 'rgb(255, 255, 255)',
+              data: [chartStats.goals, chartStats.assists, chartStats.saves],
+          }]
+      },
+
+      // Configuration options go here
+      options: {}
+    });
+
+  }
+}
