@@ -18,6 +18,7 @@ $.ajaxPrefilter(function(options) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
     }
 });
+generateLeaderBoard();
 
 function getPopulation() {
     $.ajax({
@@ -238,7 +239,9 @@ $('#steam').on('click', function() {
 });
 // Platform selection end
 
-$('#submit').on('click', function() {
+$('#thisForm').on('submit', function(event) {
+  event.preventDefault();
+  completedRequests = 0;
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -326,5 +329,6 @@ function getLeaderBoardData(selection, playlist) {
       getLeaderBoardData("#ranked3v3body", 13);
       getLeaderBoardData("#rankedduels", 10);
   }
+
 
 generateLeaderBoard();
