@@ -239,8 +239,10 @@ $('#steam').on('click', function() {
 });
 // Platform selection end
 
-$('#submit').on('click', function() {
+$('#thisForm').on('submit', function(event) {
+  event.preventDefault();
   completedRequests = 0;
+
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -248,7 +250,6 @@ $('#submit').on('click', function() {
         //Check to see if ID exists in the database (not working returns null)
         recentSearch.push(id);
         localStorage.setItem('recentSearch', JSON.stringify(recentSearch));
-
         database.ref().push({
             searchTerm: id,
             searchTermCount: 0
@@ -256,10 +257,9 @@ $('#submit').on('click', function() {
 
         resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
+    };event.preventDefault();
 
-    };
 })
-
 
 // Query API every 1 minute for population data
   getPopulation();
