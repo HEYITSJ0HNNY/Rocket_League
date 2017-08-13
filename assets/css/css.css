@@ -149,6 +149,7 @@
 
 #popHead{
   color: white;
+  font-size: 20px;
 }
 
 .footer{
@@ -184,4 +185,8 @@
 }
 
 #rankedTwos, #rankedThrees, #rankedDuels{
+
+  opacity: .8;
+  border-radius: 10px;
+
 }

@@ -18,6 +18,7 @@ $.ajaxPrefilter(function(options) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
     }
 });
+generateLeaderBoard();
 
 function getPopulation() {
     $.ajax({
