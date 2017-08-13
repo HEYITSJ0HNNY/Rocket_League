@@ -18,6 +18,7 @@ $.ajaxPrefilter(function(options) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
     }
 });
+generateLeaderBoard();
 
 function getPopulation() {
     $.ajax({
@@ -239,6 +240,7 @@ $('#steam').on('click', function() {
 // Platform selection end
 
 $('#submit').on('click', function() {
+  completedRequests = 0;
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -298,3 +300,31 @@ function graph(){
 
   }
 }
+
+function getLeaderBoardData(selection, playlist) {
+      var htmlhook = selection;
+      var playlist = playlist;
+
+      $.ajax({
+          method: 'GET',
+          url: "https://api.rocketleague.com/api/v1/" + "steam" + "/leaderboard/skills/" + playlist + "/",
+          headers: {
+              'Authorization': 'Token ' + apikey
+          }
+      }).done(function(data) {
+          console.log(data);
+          for (var i = 0; i < 51; i++) {
+              var newtr = $("<tr>");
+              $(htmlhook).append("<tr><th>" + (i + 1) + "</th>" +
+                  "<td>" + data[i].user_name + "</td>" +
+                  "<td>" + data[i].skill + "</td>" +
+                  "<td>" + data[i].tier + "</td></tr>")
+          }
+      })
+  }
+
+  function generateLeaderBoard() {
+      getLeaderBoardData("#ranked2v2body", 11);
+      getLeaderBoardData("#ranked3v3body", 13);
+      getLeaderBoardData("#rankedduels", 10);
+  }
