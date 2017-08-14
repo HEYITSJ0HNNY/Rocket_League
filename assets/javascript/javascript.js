@@ -240,8 +240,6 @@ $('#steam').on('click', function() {
 // Platform selection end
 
 $('#thisForm').on('submit', function(event) {
-  event.preventDefault();
-  completedRequests = 0;
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -257,8 +255,7 @@ $('#thisForm').on('submit', function(event) {
 
         resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
-
-    };
+    };event.preventDefault();
 })
 
 
@@ -329,6 +326,5 @@ function getLeaderBoardData(selection, playlist) {
       getLeaderBoardData("#ranked3v3body", 13);
       getLeaderBoardData("#rankedduels", 10);
   }
-
 
 generateLeaderBoard();
