@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,17 +8,12 @@
 
 <!--- Bootswatch Link --->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
-
 <!--- Custom CSS Link --->
 <link rel="stylesheet" href="assets/css/css.css">
-
-
-
   <title>Rocket Stats</title>
   <link rel="icon" type="image/png" href="assets/images/gc.png" />
 </head>
 <body>
-
 <!-- Modal Start -->
 <div class="modal fade" tabindex="-1" role="dialog" id="inputEmptyModal">
   <div class="modal-dialog" role="document">
@@ -64,7 +60,7 @@
       </div>
       <div class="modal-body">
         <p>Hi! Kevin, Ritter, and Johnny here. Our site requires an API key to access data! Please enter it below!</p>
-        <input type="text" id="apiKeyToken">
+        <input type="text" id="<apiK></apiK>eyToken">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -95,7 +91,6 @@
   </nav>
   <!--- Search Bar--->
   <form class="form-horizontal" id="thisForm">
-  <form class="form-horizontal" id="thisForm">
   <div id="homepageSearch">
     <div class="container">
       <div class="row mainSearch">
@@ -110,12 +105,11 @@
               <button id="submit" class="btn btn-default" type="submit">GO!</button></span>
               </form>
           </div>
-
         </div>
     </div>
-      <div class="canIPutThisHere">
-        <iframe src="https://open.spotify.com/embed/album/7r2p8wfr3ML0MsNUoW3I9H" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-      </div>
+    <div class="canIPutThisHere col-md-2">
+    <iframe src='https://open.spotify.com/embed/album/7r2p8wfr3ML0MsNUoW3I9H' frameborder='0' allowtransparency='true'></iframe>
+    </div>
       <div class="popIt">
           <div class="well well-lg">
             <p id="popHead">Who is playing what?</p>
@@ -134,8 +128,7 @@
   <!--- Where we will inject the data through jQuery-->
   <div id="individualStats">
     <div class="container">
-        <div class="row">
-          <div id="performance" class="col col-xs-10">
+          <div id="performance" class="col col-md-7">
             <div id="wins" class="col col-xs-1 stats">Wins
               <p id="winTotal"></p>
             </div>
@@ -164,7 +157,6 @@
               <div id="rank"></div>
             </div>
         </div>
-      </div>
     </div>
     <p id="chartTitle">Playstyle</p>
     <!-- graph shows goals/saves/assists -->

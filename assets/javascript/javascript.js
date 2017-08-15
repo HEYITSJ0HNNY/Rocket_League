@@ -314,7 +314,7 @@ function getLeaderBoardData(selection, playlist) {
           }
       }).done(function(data) {
           console.log(data);
-          for (var i = 0; i < 51; i++) {
+          for (var i = 0; i < 25; i++) {
               var newtr = $("<tr>");
               $(htmlhook).append("<tr><th>" + (i + 1) + "</th>" +
                   "<td>" + data[i].user_name + "</td>" +
