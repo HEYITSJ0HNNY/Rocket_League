@@ -144,7 +144,7 @@
   width: 190px;
   position: absolute;
   top: 40%;
-  left: 0px;
+  right: 0px;
   border-color: black;
   margin-left: 15px;
   opacity: .8;
@@ -154,8 +154,9 @@
 #rankedTwos, #rankedThrees, #rankedDuels, #rankedSoloDuel{
   background-color: black;
   color: white;
-  text-align: center;
+  text-align: left;
   margin-top: 20px;
+  border-radius: 10px;
 }
 
 #popHead{
@@ -196,14 +197,34 @@
   text-align: center;
 }
 
-#rankedTwos, #rankedThrees, #rankedDuels{
-  opacity: .8;
-  border-radius: 10px;
-
-}
 
 /*Media Queries*/
-@media (max-width: 600px) {
-  .facet_sidebar {
-    display: none;
+@media (max-width: 720px) {
+  #individualStats {
+    text-align: center;
+      position: absolute;
+      top: 40%;
+      left: 20%;
+      color: white;
+      display: none;
+      background-color: black;
+      opacity: .8;
+      width: 48%;
+      border-radius: 10px;
+      margin-bottom: 50px;
   }
+
+  @media (max-width: 600px) {
+    #individualStats {
+      text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 5%;
+        color: white;
+        display: none;
+        background-color: black;
+        opacity: .8;
+        width: 48%;
+        border-radius: 10px;
+        margin-bottom: 50px;
+    }

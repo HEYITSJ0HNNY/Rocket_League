@@ -318,8 +318,7 @@ function getLeaderBoardData(selection, playlist) {
               var newtr = $("<tr>");
               $(htmlhook).append("<tr><th>" + (i + 1) + "</th>" +
                   "<td>" + data[i].user_name + "</td>" +
-                  "<td>" + data[i].skill + "</td>" +
-                  "<td>" + data[i].tier + "</td></tr>")
+                  "<td>" + data[i].skill + "</td>" )
           }
       })
   }
