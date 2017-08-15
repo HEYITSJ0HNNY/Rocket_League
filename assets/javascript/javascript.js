@@ -70,7 +70,7 @@ function getStatsValueForUser(identification, plat) {
 function resolveVanityURL(identification, plat) {
     var id = identification;
     var platform = plat;
-    var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
+    var steamPowered = "7E205F9668E10719EFBEEB70B821FDF0";
 
     if ($('#steam').hasClass("active")) {
         $.ajax({
