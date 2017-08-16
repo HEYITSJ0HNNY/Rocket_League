@@ -123,35 +123,39 @@
       <p id="rankedSoloStandard"></p>
       <p id="rankedTeamStandard"></p>
     </div>
-          <!--- Where we will inject the data through jQuery-->
-    <div class="chartContainer" id="individualStats">
+    <div class="col-md-8 col-md-offset-2">
+      <!--- Where we will inject the data through jQuery-->
+      <div class="chartContainer" id="individualStats">
               <!-- graph shows goals/saves/assists -->
-        <div class="row">
-        <div id="performance" class="col col-md-8 col-md-offset-2">
-          <div id="wins" class="col col-md-1 stats">Wins
-            <p id="winTotal"></p>
+        <div id="performance">
+          <div class="row">
+            <div id="wins" class="col col-md-1 stats">Wins
+              <p id="winTotal"></p>
+            </div>
+            <div id="goals" class="col col-md-1 stats">Goals
+              <p id="goalTotal"></p>
+            </div>
+            <div id="saves" class="col col-md-1 stats">Saves
+              <p id="saveTotal"></p>
+            </div>
+            <div id="shots" class="col col-md-1 stats">Shots
+              <p id="shotTotal"></p>
+            </div>
+            <div id="mvps" class="col col-md-1 stats">MVP's
+              <p id="mvpTotal"></p>
+            </div>
+            <div id="assists" class="col col-md-1 stats">Assists
+              <p id="assistsTotal"></p>
+            </div>
           </div>
-          <div id="goals" class="col col-md-1 stats">Goals
-            <p id="goalTotal"></p>
-          </div>
-          <div id="saves" class="col col-md-1 stats">Saves
-            <p id="saveTotal"></p>
-          </div>
-          <div id="shots" class="col col-md-1 stats">Shots
-            <p id="shotTotal"></p>
-          </div>
-          <div id="mvps" class="col col-md-1 stats">MVP's
-            <p id="mvpTotal"></p>
-          </div>
-          <div id="assists" class="col col-md-1 stats">Assists
-            <p id="assistsTotal"></p>
-          </div>
-      <canvas id="playStyle" class="chartjs"></canvas>
+          <canvas id="playStyle" class="chartjs"></canvas>
+        </div>
       </div>
     </div>
   </div>
-  </div>
 </div>
+
+
 </div>
 <footer class="footer">
        <p class="footerText">© The Dream Team 2017</p>
