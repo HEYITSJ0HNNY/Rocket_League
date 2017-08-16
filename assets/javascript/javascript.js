@@ -70,7 +70,7 @@ function getStatsValueForUser(identification, plat) {
 function resolveVanityURL(identification, plat) {
     var id = identification;
     var platform = plat;
-    var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
+    var steamPowered = "7E205F9668E10719EFBEEB70B821FDF0";
 
     if ($('#steam').hasClass("active")) {
         $.ajax({
@@ -240,8 +240,6 @@ $('#steam').on('click', function() {
 // Platform selection end
 
 $('#thisForm').on('submit', function(event) {
-  event.preventDefault();
-  completedRequests = 0;
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -257,8 +255,7 @@ $('#thisForm').on('submit', function(event) {
 
         resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
-
-    };
+    };event.preventDefault();
 })
 
 
@@ -328,6 +325,5 @@ function getLeaderBoardData(selection, playlist) {
       getLeaderBoardData("#ranked3v3body", 13);
       getLeaderBoardData("#rankedduels", 10);
   }
-
 
 generateLeaderBoard();
