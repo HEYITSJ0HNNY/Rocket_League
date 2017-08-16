@@ -71,6 +71,7 @@
   background-size: cover;
 }
 #individualStats{
+  text-align: center;
     position: absolute;
     top: 40%;
     left: 25%;
@@ -80,6 +81,13 @@
     opacity: .8;
     width: 48%;
     border-radius: 10px;
+    margin-bottom: 50px;
+}
+
+#performance{
+  text-align: center;
+  position: relative;
+  left: auto;
 }
 
 
@@ -117,11 +125,14 @@
   margin: auto;
   margin-bottom: 15px;
 }
+.chartTitle{
+  text-align: center;
+}
 
 .canIPutThisHere{
   position: absolute;
-  top: 40%;
-  right: 80px;
+  top: 52px;
+  right: 85px;
   width: 220px;
   height: 100px;
 }
@@ -133,7 +144,7 @@
   width: 190px;
   position: absolute;
   top: 40%;
-  left: 0px;
+  right: 0px;
   border-color: black;
   margin-left: 15px;
   opacity: .8;
@@ -143,8 +154,9 @@
 #rankedTwos, #rankedThrees, #rankedDuels, #rankedSoloDuel{
   background-color: black;
   color: white;
-  text-align: center;
+  text-align: left;
   margin-top: 20px;
+  border-radius: 10px;
 }
 
 #popHead{
@@ -153,6 +165,7 @@
 }
 
 .footer{
+  position: static;
   background-color: #222222;
   text-align: center;
   color: white;
@@ -184,9 +197,35 @@
   text-align: center;
 }
 
-#rankedTwos, #rankedThrees, #rankedDuels{
 
-  opacity: .8;
-  border-radius: 10px;
 
-}
+/*Media Queries*/
+@media (max-width: 720px) {
+  #individualStats {
+    text-align: center;
+      position: absolute;
+      top: 40%;
+      left: 20%;
+      color: white;
+      display: none;
+      background-color: black;
+      opacity: .8;
+      width: 48%;
+      border-radius: 10px;
+      margin-bottom: 50px;
+  }
+
+  @media (max-width: 600px) {
+    #individualStats {
+      text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 5%;
+        color: white;
+        display: none;
+        background-color: black;
+        opacity: .8;
+        width: 48%;
+        border-radius: 10px;
+        margin-bottom: 50px;
+    }
