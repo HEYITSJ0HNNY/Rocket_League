@@ -44,8 +44,7 @@
 
 .mainSearch{
   /* changed*/
-  /*position: relative;*/
-  position: absolute;
+  position: relative;
   color: black;
   font-size: 30px;
   top: 100px;
@@ -165,7 +164,7 @@
   text-align: center;
   color: white;
   height: 50px;
-  width:100%;
+  width:100vw;
   bottom:0;
 }
 

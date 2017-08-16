@@ -133,6 +133,9 @@ function ajaxIfCalls(statistics, id, platform){
               })
             }
           })
+if(completedRequests === 3 ){
+            graph();
+          }
 
 
   } else if (!isNaN(id)) {
@@ -174,13 +177,13 @@ function ajaxIfCalls(statistics, id, platform){
             $("#mvpTotal").append(data[0].value);
 
       }else if ( stats === "assists"){
-        $("#assistsTotal").empty();
-        $("#assistsTotal").append(data[0].value);
-        chartStats.assists = data[0].value;
-        completedRequests++;
+            $("#assistsTotal").empty();
+            $("#assistsTotal").append(data[0].value);
+            chartStats.assists = data[0].value;
+            completedRequests++;
 
                 }
-      graph();
+
 })
 
 
@@ -198,9 +201,7 @@ function ajaxIfCalls(statistics, id, platform){
       $('#emptyPlatformModal').modal('show');
   }
 }
-if(completedRequests === 3 ){
-  graph();
-}
+
 
 function checkActive(item) {
     $(item).siblings().removeClass("active");
@@ -263,6 +264,8 @@ $('#submit').on('click', function() {
 
         // resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
+        console.log("CR: " + completedRequests);
+
     };
 })
 
@@ -282,7 +285,7 @@ var chartStats = {
 
 function graph(){
 
-  if(completedRequests === 3 ){
+if(completedRequests === 3 ){
     Chart.defaults.global.defaultFontColor = 'white';
     var ctx = $("#playStyle")
     var chart = new Chart(ctx, {
