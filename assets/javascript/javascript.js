@@ -18,6 +18,7 @@ $.ajaxPrefilter(function(options) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
     }
 });
+
 generateLeaderBoard();
 
 function getPopulation() {
@@ -67,46 +68,7 @@ function getStatsValueForUser(identification, plat) {
         }
 }
 
-function resolveVanityURL(identification, plat) {
-    var id = identification;
-    var platform = plat;
-    var steamPowered = "7E205F9668E10719EFBEEB70B821FDF0";
-
-    if ($('#steam').hasClass("active")) {
-        $.ajax({
-            method: 'GET',
-            url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
-            success: function(response) {
-                resolvedID = response.response.steamid;
-                $.ajax({
-                    method: 'GET',
-                    url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + resolvedID + "/",
-                    headers: {
-                        'Authorization': 'Token ' + apikey
-                    }
-                }).done(function(data) {
-                    console.log('Successfully Fetched Data:');
-                    console.log(data);
-                });
-            }
-        })
-    } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
-        $.ajax({
-            method: 'GET',
-            url: "https://api.rocketleague.com/api/v1/" + platform + "/playerskills/" + id + "/",
-            headers: {
-                'Authorization': 'Token ' + apikey
-            }
-        }).done(function(data) {
-            console.log(data);
-        });
-    } else {
-        $('#emptyPlatformModal').modal('show');
-    }
-};
-
 var completedRequests = 0;
-
 
 function ajaxIfCalls(statistics, id, platform){
   var id = id;
@@ -114,10 +76,10 @@ function ajaxIfCalls(statistics, id, platform){
   var steamPowered = "61559FC24A7A28F1C4E55C92CFBFFE46";
   var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
   var stats = statistics;
+  console.log(isNaN(id));
 
 
-
-  if ($('#steam').hasClass("active")) {
+  if ( $('#steam').hasClass("active") && isNaN(id) ) {
           $.ajax({
               method: 'GET',
               url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
@@ -133,8 +95,6 @@ function ajaxIfCalls(statistics, id, platform){
 
                       console.log('Successfully Fetched Data:');
                       console.log(data);
-                      //$("#curSeasonLb").append(data[0].value);
-                      //console.log("Data.Value: " + data[0].value);
 
                       $("#individualStats").show();
 
@@ -154,7 +114,6 @@ function ajaxIfCalls(statistics, id, platform){
                           chartStats.saves = data[0].value;
                           completedRequests++;
 
-
                     }else if ( stats === "shots"){
                           $("#shotTotal").empty();
                           $("#shotTotal").append(data[0].value);
@@ -169,12 +128,60 @@ function ajaxIfCalls(statistics, id, platform){
                       chartStats.assists = data[0].value;
                       completedRequests++;
 
-
                               }
                     graph();
               })
             }
           })
+
+
+  } else if (!isNaN(id)) {
+    $.ajax({
+        method: 'GET',
+        url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + id + "/",
+        headers: {
+            'Authorization': 'Token ' + apikey
+        }
+    }).done(function(data) {
+
+        console.log('Successfully Fetched Data:');
+        console.log(data);
+
+        $("#individualStats").show();
+
+        if ( stats === "wins"){
+          $("#winTotal").empty();
+          $("#winTotal").append(data[0].value);
+
+      } else if ( stats === "goals"){
+          $("#goalTotal").empty();
+          $("#goalTotal").append(data[0].value);
+          chartStats.goals = data[0].value;
+          completedRequests++;
+
+      }else if ( stats === "saves"){
+            $("#saveTotal").empty();
+            $("#saveTotal").append(data[0].value);
+            chartStats.saves = data[0].value;
+            completedRequests++;
+
+      }else if ( stats === "shots"){
+            $("#shotTotal").empty();
+            $("#shotTotal").append(data[0].value);
+
+      }else if ( stats === "mvps"){
+            $("#mvpTotal").empty();
+            $("#mvpTotal").append(data[0].value);
+
+      }else if ( stats === "assists"){
+        $("#assistsTotal").empty();
+        $("#assistsTotal").append(data[0].value);
+        chartStats.assists = data[0].value;
+        completedRequests++;
+
+                }
+      graph();
+})
 
 
   } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
@@ -239,7 +246,8 @@ $('#steam').on('click', function() {
 });
 // Platform selection end
 
-$('#thisForm').on('submit', function(event) {
+$('#submit').on('click', function() {
+    event.preventDefault();
     var id = $('#inputSearch').val();
     if (id === "") {
         $('#inputEmptyModal').modal('show');
@@ -253,9 +261,9 @@ $('#thisForm').on('submit', function(event) {
             searchTermCount: 0
         });
 
-        resolveVanityURL(id, platform);
+        // resolveVanityURL(id, platform);
         getStatsValueForUser(id, platform);
-    };event.preventDefault();
+    };
 })
 
 
