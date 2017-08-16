@@ -87,85 +87,71 @@
           <li><a href="index2.html">Leaderboards</a></li>
         </ul>
       </div>
-    </div>
   </nav>
   <!--- Search Bar--->
-  <form class="form-horizontal" id="thisForm">
   <div id="homepageSearch">
-    <div class="container">
-      <div class="row mainSearch">
-        <div class="col-lg-11">
-          <div class="input-group">
-            <span class="input-group-btn search-btn">
-              <button id="steam" class="btn btn-default" type="button"></button>
-              <button id="ps4" class="btn btn-default" type="button"></button>
-              <button id="xbox" class="btn btn-default" type="button"></button>
-            </span>
-            <input id="inputSearch" type="text" class="form-control" placeholder="Search for...">  <span class="input-group-btn search-btn">
-              <button id="submit" class="btn btn-default" type="submit">GO!</button></span>
-              </form>
 
+      <div class="container">
+        <div class="row mainSearch">
+          <div class="col-lg-11">
+            <form class="form-horizontal" id="thisForm">
+              <div class="input-group">
+              <span class="input-group-btn search-btn">
+                <button id="steam" class="btn btn-default" type="button"></button>
+                <button id="ps4" class="btn btn-default" type="button"></button>
+                <button id="xbox" class="btn btn-default" type="button"></button>
+                </span>
+                <input id="inputSearch" type="text" class="form-control" placeholder="Search for...">  <span class="input-group-btn search-btn">
+                <button id="submit" class="btn btn-default" type="submit">GO!</button></span>
+              </div>
+            </form>
           </div>
         </div>
     </div>
-    <div class="canIPutThisHere col-md-2">
-    <iframe src='https://open.spotify.com/embed/album/7r2p8wfr3ML0MsNUoW3I9H' frameborder='0' allowtransparency='true'></iframe>
-    </div>
-      <div class="popIt">
-          <div class="well well-lg">
-            <p id="popHead">Who is playing what?</p>
-            <p id="rankedSoloDuel"></p>
-            <p id="rankedDoubles"></p>
-            <p id="rankedSoloStandard"></p>
-            <p id="rankedTeamStandard"></p>
-        </div>
+  <div class="container" id="historyBar">
+      <div class="row">
+          <div class="col-xs-10"></div>
       </div>
-    <div class="container" id="historyBar">
+  </div>
+<!-- Statistics populated -->
+<div class="container">
+  <div class="row">
+    <div class="popStats col-md-4">
+      <p id="popHead">Who is playing what?</p>
+      <p id="rankedSoloDuel"></p>
+      <p id="rankedDoubles"></p>
+      <p id="rankedSoloStandard"></p>
+      <p id="rankedTeamStandard"></p>
+    </div>
+          <!--- Where we will inject the data through jQuery-->
+    <div class="chartContainer" id="individualStats">
+              <!-- graph shows goals/saves/assists -->
         <div class="row">
-            <div class="col-xs-10"></div>
-        </div>
-    </div>
-  </div>
-  <!--- Where we will inject the data through jQuery-->
-  <div id="individualStats">
-    <div class="container">
-          <div id="performance" class="col col-md-7">
-            <div id="wins" class="col col-xs-1 stats">Wins
-              <p id="winTotal"></p>
-            </div>
-
-            <div id="goals" class="col col-xs-1 stats">Goals
-              <p id="goalTotal"></p>
-            </div>
-            <div id="saves" class="col col-xs-1 stats">Saves
-              <p id="saveTotal"></p>
-            </div>
-            <div id="shots" class="col col-xs-1 stats">Shots
-              <p id="shotTotal"></p>
-            </div>
-            <div id="mvps" class="col col-xs-1 stats">MVP's
-              <p id="mvpTotal"></p>
-            </div>
-            <div id="assists" class="col col-xs-1 stats">Assists
-              <p id="assistsTotal"></p>
-            </div>
-            <div id="gsPercent" class="col col-xs-1 stats">
-              <div id="gsTotal"></div>
-              <div id="rank"></div>
-            </div>
-            <div id="mvpWinPercent" class="col col-xs-1 stats">
-              <div id="mvpWpTotal"></div>
-              <div id="rank"></div>
-            </div>
-        </div>
-    </div>
-    <p id="chartTitle">Playstyle</p>
-    <!-- graph shows goals/saves/assists -->
-    <div class="chartContainer">
+        <div id="performance" class="col col-md-7 col-md-offset-2">
+          <div id="wins" class="col col-md-1 stats">Wins
+            <p id="winTotal"></p>
+          </div>
+          <div id="goals" class="col col-md-1 stats">Goals
+            <p id="goalTotal"></p>
+          </div>
+          <div id="saves" class="col col-md-1 stats">Saves
+            <p id="saveTotal"></p>
+          </div>
+          <div id="shots" class="col col-md-1 stats">Shots
+            <p id="shotTotal"></p>
+          </div>
+          <div id="mvps" class="col col-md-1 stats">MVP's
+            <p id="mvpTotal"></p>
+          </div>
+          <div id="assists" class="col col-md-1 stats">Assists
+            <p id="assistsTotal"></p>
+          </div>
       <canvas id="playStyle" class="chartjs"></canvas>
+      </div>
     </div>
   </div>
-
+  </div>
+</div>
 </div>
 <footer class="footer">
        <p class="footerText">© The Dream Team 2017</p>
