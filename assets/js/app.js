@@ -1,4 +1,3 @@
-// Javascript written by Ritter Gustave
 var recentSearch = [];
 var chartStats = {
         assists: "",
@@ -72,8 +71,6 @@ function getStatsValueForUser(identification, plat) {
     }
 }
 
-
-
 function ajaxIfCalls(statistics, id, platform){
   var id = id;
   var platform = platform;
@@ -81,7 +78,6 @@ function ajaxIfCalls(statistics, id, platform){
   var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
   var stats = statistics;
   console.log(isNaN(id));
-
 
   if ( $('#steam').hasClass("active") && isNaN(id) ) {
           $.ajax({
@@ -184,7 +180,6 @@ function ajaxIfCalls(statistics, id, platform){
 
 })
 
-
   } else if ($('#xbox').hasClass('active') || $('#ps4').hasClass('active')) {
       $.ajax({
           method: 'GET',
@@ -199,7 +194,6 @@ function ajaxIfCalls(statistics, id, platform){
       $('#emptyPlatformModal').modal('show');
   }
 }
-
 
 function checkActive(item) {
     $(item).siblings().removeClass("active");
@@ -274,9 +268,6 @@ getPopulation();
 setInterval(function () {
   getPopulation();
 }, 60000);
-
-
-
 
 function graph(){
  console.log(chartStats);
