@@ -1,5 +1,11 @@
 // Javascript written by Ritter Gustave
 var recentSearch = [];
+var chartStats = {
+        assists: "",
+        goals: "",
+        saves: ""
+};
+var completedRequests = 0;
 // Firebase initialization
 var config = {
     apiKey: "AIzaSyAf2Mv8BSPQn2d50Uu_rbP-V3V8rwtdqP0",
@@ -18,9 +24,6 @@ $.ajaxPrefilter(function(options) {
         options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
     }
 });
-
-generateLeaderBoard();
-
 function getPopulation() {
     $.ajax({
         method: 'GET',
@@ -36,14 +39,14 @@ function getPopulation() {
 
     database.ref().on('value', function (snap) {
       console.log(snap.val());
-      //Value for Steam players playing ranked solo duel
-      console.log("Ranked Solo Duel",snap.val().PopObject.Steam[10].NumPlayers);
-      // Value for steam players playing ranked team doubles
-      console.log("Ranked team doubles",snap.val().PopObject.Steam[11].NumPlayers);
-      // Value for steam players playing ranked solo standard
-      console.log("Ranked solo standard",snap.val().PopObject.Steam[12].NumPlayers);
-      // Value for steam players playing ranked team standard
-      console.log("Ranked team standard",snap.val().PopObject.Steam[13].NumPlayers);
+      // //Value for Steam players playing ranked solo duel
+      // console.log("Ranked Solo Duel",snap.val().PopObject.Steam[10].NumPlayers);
+      // // Value for steam players playing ranked team doubles
+      // console.log("Ranked team doubles",snap.val().PopObject.Steam[11].NumPlayers);
+      // // Value for steam players playing ranked solo standard
+      // console.log("Ranked solo standard",snap.val().PopObject.Steam[12].NumPlayers);
+      // // Value for steam players playing ranked team standard
+      // console.log("Ranked team standard",snap.val().PopObject.Steam[13].NumPlayers);
 
       $("#rankedSoloDuel").text("Ranked Solo Duel: " + snap.val().PopObject.Steam[10].NumPlayers);
 
@@ -61,14 +64,15 @@ function getStatsValueForUser(identification, plat) {
     var id = identification;
     var platform = plat;
     var statsArray = ["assists", "goals", "mvps", "saves", "shots", "wins"];
-
-        for( var i = 0; i < statsArray.length; i++){
-            var statistics = statsArray[i];
-            ajaxIfCalls(statistics, id, platform);
-        }
+    console.log(identification, 'id::');
+    console.log('plat:::: ', plat);
+    for( var i = 0; i < statsArray.length; i++){
+      var statistics = statsArray[i];
+      ajaxIfCalls(statistics, id, platform);
+    }
 }
 
-var completedRequests = 0;
+
 
 function ajaxIfCalls(statistics, id, platform){
   var id = id;
@@ -84,7 +88,7 @@ function ajaxIfCalls(statistics, id, platform){
               method: 'GET',
               url: "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=" + steamPowered + "&vanityurl=" + id,
               success: function(response) {
-                  resolvedID = response.response.steamid;
+                  var resolvedID = response.response.steamid;
                   $.ajax({
                       method: 'GET',
                       url: "https://api.rocketleague.com/api/v1/" + platform + "/leaderboard/stats/" + stats + "/" + resolvedID + "/",
@@ -93,9 +97,9 @@ function ajaxIfCalls(statistics, id, platform){
                       }
                   }).done(function(data) {
 
-                      console.log('Successfully Fetched Data:');
-                      console.log(data);
+                      console.log('Successfully Fetched Data: ', data);
 
+                      console.log('das data: ', data);
                       $("#individualStats").show();
 
                       if ( stats === "wins"){
@@ -128,16 +132,11 @@ function ajaxIfCalls(statistics, id, platform){
                       chartStats.assists = data[0].value;
                       completedRequests++;
 
-                              }
+                    }
                     graph();
               })
             }
           })
-// if(completedRequests === 3 ){
-//             graph();
-//           }
-
-
   } else if (!isNaN(id)) {
     $.ajax({
         method: 'GET',
@@ -181,8 +180,7 @@ function ajaxIfCalls(statistics, id, platform){
             $("#assistsTotal").append(data[0].value);
             chartStats.assists = data[0].value;
             completedRequests++;
-
-                }
+        }
 
 })
 
@@ -270,28 +268,29 @@ $('#submit').on('click', function() {
 })
 
 
-// Query API every 1 minute for population data
-  getPopulation();
+//Query API every 1 minute for population data
+getPopulation();
+
 setInterval(function () {
   getPopulation();
 }, 60000);
 
 
-var chartStats = {
-        assists: "",
-        goals: "",
-        saves: ""
-}
+
 
 function graph(){
-
+ console.log(chartStats);
+ console.log('before completedRequests: ', completedRequests);
 if(completedRequests === 3 ){
     Chart.defaults.global.defaultFontColor = 'white';
     var ctx = $("#playStyle")
+    console.log('line: 293.', chartStats.goals, chartStats.assists, chartStats.saves);
+    var goals = chartStats.goals,
+        assists = chartStats.assists,
+        saves = chartStats.saves;
     var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: "doughnut",
-
       // The data for our dataset
       data: {
           labels: ["Goals", "Assists", "Saves"],
@@ -299,14 +298,13 @@ if(completedRequests === 3 ){
               label: "My First dataset",
               backgroundColor: ["#ff6700", "#C0C0C0", "#004E98"],
               borderColor: 'rgb(255, 255, 255)',
-              data: [chartStats.goals, chartStats.assists, chartStats.saves],
+              data: [goals, assists, saves]
           }]
       },
-
       // Configuration options go here
       options: {}
     });
-
+    completedRequests = 0
   }
 }
 
