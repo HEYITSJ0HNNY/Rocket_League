@@ -133,9 +133,9 @@ function ajaxIfCalls(statistics, id, platform){
               })
             }
           })
-if(completedRequests === 3 ){
-            graph();
-          }
+// if(completedRequests === 3 ){
+//             graph();
+//           }
 
 
   } else if (!isNaN(id)) {
