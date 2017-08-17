@@ -116,41 +116,38 @@
 <!-- Statistics populated -->
 <div class="container">
   <div class="row">
-    <div class="popStats col-md-4">
+    <div class="popStats col-md-3">
       <p id="popHead">Who is playing what?</p>
       <p id="rankedSoloDuel"></p>
       <p id="rankedDoubles"></p>
       <p id="rankedSoloStandard"></p>
       <p id="rankedTeamStandard"></p>
     </div>
-  </div>
-  
-    <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-8 col-md-offset-2">
       <!--- Where we will inject the data through jQuery-->
-      <div class="chartContainer" id="individualStats">
+        <div class="chartContainer" id="performance">
               <!-- graph shows goals/saves/assists -->
-        <div id="performance">
-          <div class="row">
-            <div id="wins" class="col col-md-1 stats">Wins
-              <p id="winTotal"></p>
-            </div>
-            <div id="goals" class="col col-md-1 stats">Goals
-              <p id="goalTotal"></p>
-            </div>
-            <div id="saves" class="col col-md-1 stats">Saves
-              <p id="saveTotal"></p>
-            </div>
-            <div id="shots" class="col col-md-1 stats">Shots
-              <p id="shotTotal"></p>
-            </div>
-            <div id="mvps" class="col col-md-1 stats">MVP's
-              <p id="mvpTotal"></p>
-            </div>
-            <div id="assists" class="col col-md-1 stats">Assists
-              <p id="assistsTotal"></p>
-            </div>
+          <div id="individualStats">
+              <div id="wins" class="col col-md-1 stats">Wins
+                <p id="winTotal"></p>
+              </div>
+              <div id="goals" class="col col-md-1 stats">Goals
+                <p id="goalTotal"></p>
+              </div>
+              <div id="saves" class="col col-md-1 stats">Saves
+                <p id="saveTotal"></p>
+              </div>
+              <div id="shots" class="col col-md-1 stats">Shots
+                <p id="shotTotal"></p>
+              </div>
+              <div id="mvps" class="col col-md-1 stats">MVP's
+                <p id="mvpTotal"></p>
+              </div>
+              <div id="assists" class="col col-md-1 stats">Assists
+                <p id="assistsTotal"></p>
+              </div>
+            <canvas id="playStyle" class="chartjs"></canvas>
           </div>
-          <canvas id="playStyle" class="chartjs"></canvas>
         </div>
       </div>
     </div>

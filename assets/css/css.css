@@ -74,24 +74,21 @@
   background-size: cover;
 }
 #individualStats{
-  text-align: center;
-    position: absolute;
-    top: 40%;
-    left: 25%;
+    text-align: center;
+    position: relative;
+    top: 200px;
     color: white;
     display: none;
     background-color: black;
     opacity: .8;
-    width: 48%;
     border-radius: 10px;
     margin-bottom: 50px;
+    width: auto;
 }
 
-#performance{
-  text-align: center;
-  position: relative;
-  left: auto;
-}
+/*#performance{
+  width: auto;
+}*/
 
 
 
@@ -109,21 +106,13 @@
 
 }
 
-/*#performance{
-  border: solid;
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-*/
 .stats{
   margin: 15px;
 }
 
 
 .chartContainer{
-  width: 275px;
+  width: 400px;
   margin: auto;
   margin-bottom: 15px;
 }
@@ -224,7 +213,7 @@
   }
 }
 
-  @media (max-width: 600px) {
+  @media (max-width: 1000px) {
     /*#individualStats {
       text-align: center;
         position: absolute;
@@ -263,4 +252,5 @@ body,
 #homepageSearch {
   height:100%;
   overflow:auto;
+  overflow-x: hidden;
 }
