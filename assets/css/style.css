@@ -249,7 +249,7 @@
 
 html,
 body,
-#homepageSearch, {
+#homepageSearch {
   height:100%;
   overflow:auto;
   overflow-x: hidden;
