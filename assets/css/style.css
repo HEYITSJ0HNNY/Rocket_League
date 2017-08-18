@@ -55,7 +55,7 @@
 
 #homepageSearch{
   background-image: url(../images/background);
-  height: 100vh;
+  /*height: 100vh;*/
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -71,7 +71,7 @@
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover
 }
 #individualStats{
     text-align: center;
@@ -249,7 +249,7 @@
 
 html,
 body,
-#homepageSearch {
+#homepageSearch, {
   height:100%;
   overflow:auto;
   overflow-x: hidden;
